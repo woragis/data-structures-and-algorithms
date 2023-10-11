@@ -74,15 +74,6 @@ def buildGraph(edges):
     return graph
 
 
-edges = [
-    ['i', 'j'],
-    ['k', 'i'],
-    ['m', 'k'],
-    ['k', 'l'],
-    ['o', 'n']
-]
-
-
 def connectedComonentsCount(graph):
     visited = set()
     count = 0
@@ -98,6 +89,73 @@ def explore(graph, current, visited):
     visited.add(current)
     for neighboor in graph[current]:
         explore(graph, neighboor, visited)
+    return True
+
+
+def largestComponent(graph):
+    visited = set()
+    longest = 0
+    for node in graph:
+        size = exploreSize(graph, node, visited)
+        if size > longest:
+            longest = size
+    return longest
+
+
+def exploreSize(graph, node, visited):
+    if node in visited:
+        return 0
+    visited.add(node)
+    size = 1
+    for neighbor in graph[node]:
+        size += exploreSize(graph, neighbor, visited)
+    return size
+
+
+def shortestPath(edges, nodeA, nodeB):
+    graph = buildGraph(edges)
+    visited = set(nodeA)
+    queue = [[nodeA, 0]]
+
+    while len(queue) > 0:
+        [node, distance] = queue.pop(0)
+        if node == nodeB:
+            return distance
+        for neighbor in graph[node]:
+            if not neighbor in visited:
+                visited.add(neighbor)
+                queue.append([neighbor, distance+1])
+    return -1
+
+
+def islandCount(grid):
+    visited = set()
+    island_count = 0
+    for row in range(len(grid)):
+        for column in range(len(grid[0])):
+            if (_explore(grid, row, column, visited)):
+                island_count += 1
+
+    return island_count
+
+
+def _explore(grid, row, column, visited) -> bool:
+    rowInbounds = 0 <= row and row < len(grid)
+    colInbounds = 0 <= column and column < len(grid[0])
+
+    if not rowInbounds or not colInbounds:
+        return False
+    if grid[row][column] == 'W':
+        return False
+
+    pos = f'{row},{column}'
+    if pos in visited:
+        return False
+    visited.add(pos)
+    _explore(grid, row-1, column, visited)
+    _explore(grid, row+1, column, visited)
+    _explore(grid, row, column-1, visited)
+    _explore(grid, row, column+1, visited)
     return True
 
 
@@ -122,7 +180,23 @@ if __name__ == '__main__':
         'c': ['a']
     }
     # print(connectedComonentsCount(graph3))
-    print(connectedComonentsCount(buildGraph(edges)))
+    edges = [
+        ['i', 'j'],
+        ['k', 'i'],
+        ['m', 'k'],
+        ['k', 'l'],
+        ['o', 'n']
+    ]
+    numberGraph = [
+        [1, 2],
+        [2, 3],
+        [4, 5],
+        [5, 3]
+    ]
+    myGraph = buildGraph(numberGraph)
+    largest = largestComponent(myGraph)
+    shortestPath = shortestPath(edges, 'i', 'l')
+    print(shortestPath)
 
     # print('Depth First Search: ')
     # depthFirstSearchRecursive(graph2, 'a')
