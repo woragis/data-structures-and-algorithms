@@ -159,6 +159,37 @@ def _explore(grid, row, column, visited) -> bool:
     return True
 
 
+def minimumIsland(grid):
+    import math
+    visited = set()
+    min_size = 123421234  # use max big int size
+    for row in range(len(grid)):
+        for column in range(len(grid[0])):
+            size = _exploreSize(grid, row, column, visited)
+            if size > 0 and size < min_size:
+                min_size = size
+    return min_size
+
+
+def _exploreSize(grid, row, column, visited: set):
+    rowInbounds = 0 <= row and row <= len(grid)
+    colInbounds = 0 <= column and row <= len(grid[0])
+    if not rowInbounds or not colInbounds:
+        return 0
+    if grid[row][column] == 'w':
+        return 0
+    pos = f'{row},{column}'
+    if pos in visited:
+        return 0
+    visited.add(pos)
+    size = 1
+    size += _exploreSize(grid, row-1, column, visited)
+    size += _exploreSize(grid, row+1, column, visited)
+    size += _exploreSize(grid, row, column-1, visited)
+    size += _exploreSize(grid, row, column+1, visited)
+    return size
+
+
 if __name__ == '__main__':
     graph1 = {  # directed graph
         'a': ['b', 'c'],
