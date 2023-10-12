@@ -52,6 +52,17 @@ def rightRotate(string: str, times: int) -> str:
         string = _rightRotate(string)
     return string
 
+# rotation without being recursive/iterative
+# sort string
+# print frequency of each character in alphabetical order
+# swap characters in string
+# insert characters in a string at a certain position
+# check if two strings are the same
+# concatenating two strings
+# remove all ocurrences of a character in a string
+
+# substring and subsequence
+
 
 if __name__ == '__main__':
     myString = 'Jezreel de Andrade Galvao Veloso'
