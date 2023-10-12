@@ -16,20 +16,30 @@ def reverseListRecursive(arr, start, end):
     reverseListRecursive(arr, start+1, end-1)
 
 
-def rightRotation(arr: list, times: int):
-    while times > 0:
-        first_element = arr.pop(0)
-        arr.append(first_element)
-        times -= 1
-        rightRotation(arr, times)
-
-
 def leftRotation(arr: list, times: int):
-    while times > 0:
-        last_element = arr.pop()
-        arr.insert(0, last_element)
-        times -= 1
-        leftRotation(arr, times)
+    # while times > 0:
+    #     first_element = arr.pop(0)
+    #     arr.append(first_element)
+    #     times -= 1
+    #     leftRotation(arr, times)
+    s = arr[:times]
+    e = arr[times:]
+    arr = e+s
+    return arr
+
+
+def rightRotation(arr: list, times: int):
+    # while times > 0:
+    #     last_element = arr.pop()
+    #     arr.insert(0, last_element)
+    #     times -= 1
+    #     rightRotation(arr, times)
+    size = len(arr)
+    end_idx = size-times
+    e = arr[end_idx:]
+    s = arr[:end_idx]
+    arr = e+s
+    return arr
 
 
 def jugglingRotation(arr: list):
@@ -104,10 +114,11 @@ if __name__ == '__main__':
     myArr = [1, 2, 3, 4, 5, 6, 7, 8]
     print(myArr)
     # print(binarySearch(myArr, 2))
-    pos = deleteElement(myArr, 5)
+    # pos = deleteElement(myArr, 5)
+    myArr = rightRotation(myArr, 1)
+    print(myArr)
 '''
     print(myArr)
-    rightRotation(myArr, 1)
     print(myArr)
     rightRotation(myArr, 1)
     print(myArr)
