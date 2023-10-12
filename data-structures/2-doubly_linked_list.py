@@ -12,6 +12,7 @@ class DoublyLinkedList:
     def append(self, data):
         cur = self.head
         new_node = Node(data)
+        cur.prev = new_node
         while cur.next:
             cur = cur.next
         new_node.prev = cur
@@ -28,13 +29,11 @@ class DoublyLinkedList:
 
     def readLast(self):
         cur = self.head
-        while cur.next:
-            cur = cur.next
-        last = cur
         elems = []
-        while last.prev:
-            elems.append(last.data)
-            last = last.prev
+        while cur.prev != self.head:
+            cur = cur.prev
+            elems.append(cur.data)
+        cur = cur.prev
         print(elems)
 
 
