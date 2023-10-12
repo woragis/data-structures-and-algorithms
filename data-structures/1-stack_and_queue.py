@@ -1,8 +1,12 @@
 class Stack:
     def __init__(self, max_size=None):
-        self.stack = []*max_size
+        self.stack = []
         self.size = 0
-        self.max_size = max_size
+        if max_size:
+            self.max_size = max_size
+        else:
+            from sys import maxsize
+            self.max_size = maxsize
 
     def __str__(self) -> str:
         return f'Stack: {self.stack}'
@@ -17,13 +21,13 @@ class Stack:
         if self.isFull:
             return 'can\'t push more items'
         else:
-            self.stack.append(data)
             self.size += 1
+            return self.stack.append(data)
 
     def pop(self):
         if not self.isEmpty:
-            self.stack.pop()
             self.size -= 1
+            return self.stack.pop()
         else:
             return 'the stack is empty'
 
@@ -32,7 +36,11 @@ class Queue:
     def __init__(self, max_size=None):
         self.queue = []
         self.size = 0
-        self.max_size = max_size
+        if max_size:
+            self.max_size = max_size
+        else:
+            from sys import maxsize
+            self.max_size = maxsize
 
     def __str__(self) -> str:
         return f'Queue: {self.queue}'
@@ -45,12 +53,14 @@ class Queue:
 
     def push(self, data):
         if not self.isFull():
+            self.size += 1
             return self.queue.append(data)
         else:
             return 'No space left'
 
     def pop(self):
         if not self.isEmpty():
+            self.size -= 1
             return self.queue.pop(0)
         else:
             return 'No items left'
