@@ -11,6 +11,7 @@ def _binarySearch(arr, key, left, right):
 
 
 def exponentialSearch(arr, key):
+    n = len(arr)
     if arr[0] == key:
         return 0
     i = 1
