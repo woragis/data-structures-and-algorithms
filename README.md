@@ -15,6 +15,7 @@ _[done]_
 7. Counting Sort
 8. Radix Sort
 9. Bucket Sort
+10. Shell Sort _[todo]_
 
 _Extras: Tim Sort, Tree Sort_ _[todo]_
 
