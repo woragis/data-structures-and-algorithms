@@ -15,13 +15,13 @@ def searchMatrix(matrix, key):
 
 
 def searchMatriIterative(matrix, key):
-    # visited_set = set()
+    visited_set = set()
     for row in range(len(matrix)):
         for column in range(len(matrix[row])):
-            # pos = f'{row},{column}'
-            # if pos in visited_set:
-            #     continue
-            # visited_set.add(pos)
+            pos = f'{row},{column}'
+            if pos in visited_set:
+                continue
+            visited_set.add(pos)
             if matrix[row][column] == key:
                 return pos
     return -1
