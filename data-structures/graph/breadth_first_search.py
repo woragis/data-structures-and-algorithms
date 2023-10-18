@@ -1,4 +1,4 @@
-def breadthFirstSearch(graph, root, target) -> bool:
+def breadthFirstSearch(graph: dict, root: str, target: str) -> bool:
     queue = [root]
     visited = set()
     while queue:
