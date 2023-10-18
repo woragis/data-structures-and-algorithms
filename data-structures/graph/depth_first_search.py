@@ -62,16 +62,42 @@ class Graph:
                     stack.append(neighbors)
 
 
+def depthFirstSearch_Recursive(graph, current, visited: set = set()):
+    # uses recursion thus the call stack
+    if current not in visited:
+        print(current)
+        visited.add(current)
+        for neighbor in graph[current]:
+            depthFirstSearch_Recursive(graph, neighbor, visited)
+
+
+def depthFirstSearch_Iterative(graph, node):
+    visited = set()
+    stack = [node]
+    while len(stack) > 0:
+        cur = stack.pop()
+        if cur not in visited:
+            visited.add(cur)
+            print(cur)
+            for neighbor in reversed(range(len(graph[cur]))):
+                stack.append(graph[cur][neighbor])
+
+
 if __name__ == '__main__':
     graph = {
         'A': ['B', 'C'],
         'B': ['D', 'E'],
         'C': ['F', 'G'],
-        'D': [],
-        'E': [],
-        'F': [],
+        'D': ['E', 'G'],
+        'E': ['X', 'Y', 'Z'],
+        'F': ['W'],
         'G': [],
+        'X': [],
+        'Y': [],
+        'Z': [],
+        'W': []
     }
+    '''
     newGraph = Graph()
     newGraph.insert('A', ['B', 'C'])
     newGraph.insert('B', ['A', 'D', 'E'])
@@ -81,4 +107,7 @@ if __name__ == '__main__':
     newGraph.insert('F', [])
     newGraph.insert('G', [])
     newGraph.insert('Z', [])
-    newGraph.traverse('A')
+    newGraph.traverse('A')'''
+    # mySet = set()
+    # depthFirstSearch_Recursive(graph, 'A', mySet)
+    depthFirstSearch_Iterative(graph, 'A')
