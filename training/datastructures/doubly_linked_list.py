@@ -50,7 +50,9 @@ class DoublyLinkedList:
             last = cur
             cur = cur.next
             if cur.data == target:
+                temp = cur.next
                 last.next = cur.next
+                temp.prev = cur.prev
             if cur == self.root:
                 break
 
@@ -61,5 +63,7 @@ if __name__ == '__main__':
     myDLL.insert(16)
     myDLL.insert(17)
     myDLL.insert(18)
-    myDLL.traverse()
+    myDLL.delete(15)
+    myDLL.delete(16)
     myDLL.reverseTraverse()
+    # myDLL.reverseTraverse()
