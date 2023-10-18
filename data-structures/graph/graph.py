@@ -43,3 +43,11 @@
 #   Ford-Fulkerson
 #   Edmonds-Karp
 #   Dicnic's Algorithm
+print('Most common graph algorithms:')
+print('DFS - Depth First Search (stack for iterative or call stack for recursive)')
+print('BFS - Breadth First Search (queue and iterative)')
+print('Union Find')
+print('Topological Sort - alien dict')
+print('Dijksta\'s Shortest Path Algorithm (min-heap or priority queue) network delay time')
+print('Prim and Kruskal - (minimum spanning tree)')
+print('Floyd Warshall\'s algorithms')
